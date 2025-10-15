@@ -1,73 +1,129 @@
-# React + TypeScript + Vite
+# 🔐 NilData Wallet Connector
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React provider for seamless NilData Wallet browser extension authentication.
 
-Currently, two official plugins are available:
+[![npm version](https://badge.fury.io/js/nil-data-wallet-connector.svg)](https://www.npmjs.com/package/nil-data-wallet-connector)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Installation
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install nil-data-wallet-connector
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Quick Start
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```typescript
+import { NilDataWalletProvider, useNilDataWallet } from 'nil-data-wallet-connector';
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+// 1. Wrap your app
+function App() {
+  return (
+    <NilDataWalletProvider extensionId="your-extension-id">
+      <Dashboard />
+    </NilDataWalletProvider>
+  );
+}
+
+// 2. Use the hook
+function Dashboard() {
+  const { nillionDiD, extensionConnected } = useNilDataWallet();
+  
+  return (
+    <div>
+      {extensionConnected && <p>Connected: {nillionDiD}</p>}
+    </div>
+  );
+}
 ```
+
+## Features
+
+- 🎯 Simple Provider/Hook pattern
+- 🎨 Customizable UI
+- 🔄 Auto-connect support
+- 🛡️ Full TypeScript support
+- 📦 Zero dependencies
+
+## Usage
+
+### Environment Setup
+
+```env
+# .env
+VITE_EXTENSION_ID=your_extension_id_here
+```
+
+### Basic Usage
+
+```typescript
+<NilDataWalletProvider extensionId={import.meta.env.VITE_EXTENSION_ID}>
+  <App />
+</NilDataWalletProvider>
+```
+
+### Custom UI
+
+```typescript
+<NilDataWalletProvider 
+  extensionId="..."
+  customUI={({ requestAccess, extensionConnected }) => (
+    <button onClick={requestAccess}>
+      {extensionConnected ? 'Connected' : 'Connect Wallet'}
+    </button>
+  )}
+>
+  <App />
+</NilDataWalletProvider>
+```
+
+### Using the Hook
+
+```typescript
+const { 
+  nillionDiD,
+  extensionConnected,
+  requestAccess,
+  disconnect 
+} = useNilDataWallet();
+```
+
+## API
+
+### Provider Props
+
+| Prop | Type | Required | Default |
+|------|------|----------|---------|
+| `extensionId` | `string` | Yes | - |
+| `children` | `ReactNode` | Yes | - |
+| `customUI` | `function` | No | - |
+| `autoConnect` | `boolean` | No | `false` |
+| `onConnectionChange` | `function` | No | - |
+
+### Hook Returns
+
+```typescript
+{
+  nillionDiD: string | null;
+  extensionConnected: boolean;
+  status: { message: string; type: string };
+  requestAccess: () => void;
+  disconnect: () => void;
+  extensionId: string;
+}
+```
+
+## Requirements
+
+- React 16.8+
+- Chrome/Chromium browser
+- NilData Wallet extension installed
+
+## License
+
+MIT © [ysongh](https://github.com/ysongh)
+
+## Links
+
+- [GitHub](https://github.com/ysongh/nil-data-wallet-connector)
+- [Issues](https://github.com/ysongh/nil-data-wallet-connector/issues)
+- [NPM](https://www.npmjs.com/package/nil-data-wallet-connector)
