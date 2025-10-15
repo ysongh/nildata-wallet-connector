@@ -1,6 +1,6 @@
 {
   "name": "nildata-wallet-connector",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "React provider for NilData Wallet browser extension authentication",
   "type": "module",
   "main": "./dist/index.cjs.js",

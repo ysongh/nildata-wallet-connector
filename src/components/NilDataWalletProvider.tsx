@@ -1,6 +1,8 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import type { ReactNode } from 'react';
 
+import { EXTENSION_ID } from '../keys';
+
 interface StatusState {
   message: string;
   type: 'pending' | 'granted' | 'denied';
@@ -60,12 +62,13 @@ const NilDataWalletContext = createContext<NilDataWalletContextValue | null>(nul
  * Handles extension connection and provides DID to all child components
  */
 export const NilDataWalletProvider = ({ 
-  extensionId, 
   children,
   onConnectionChange,
   customUI,
   autoConnect = false
 }: NilDataWalletProviderProps) => {
+  const extensionId = EXTENSION_ID;
+
   const [nillionDiD, setNillionDiD] = useState<string | null>(null);
   const [status, setStatus] = useState<StatusState>({
     message: 'Extension not detected - Please install the extension first',

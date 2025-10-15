@@ -18,7 +18,7 @@ import { NilDataWalletProvider, useNilDataWallet } from 'nildata-wallet-connecto
 // 1. Wrap your app
 function App() {
   return (
-    <NilDataWalletProvider extensionId="your-extension-id">
+    <NilDataWalletProvider>
       <Dashboard />
     </NilDataWalletProvider>
   );
@@ -46,17 +46,10 @@ function Dashboard() {
 
 ## Usage
 
-### Environment Setup
-
-```env
-# .env
-VITE_EXTENSION_ID=your_extension_id_here
-```
-
 ### Basic Usage
 
 ```typescript
-<NilDataWalletProvider extensionId={import.meta.env.VITE_EXTENSION_ID}>
+<NilDataWalletProvider>
   <App />
 </NilDataWalletProvider>
 ```
@@ -65,7 +58,6 @@ VITE_EXTENSION_ID=your_extension_id_here
 
 ```typescript
 <NilDataWalletProvider 
-  extensionId="..."
   customUI={({ requestAccess, extensionConnected }) => (
     <button onClick={requestAccess}>
       {extensionConnected ? 'Connected' : 'Connect Wallet'}
@@ -93,7 +85,6 @@ const {
 
 | Prop | Type | Required | Default |
 |------|------|----------|---------|
-| `extensionId` | `string` | Yes | - |
 | `children` | `ReactNode` | Yes | - |
 | `customUI` | `function` | No | - |
 | `autoConnect` | `boolean` | No | `false` |
@@ -108,7 +99,6 @@ const {
   status: { message: string; type: string };
   requestAccess: () => void;
   disconnect: () => void;
-  extensionId: string;
 }
 ```
 
