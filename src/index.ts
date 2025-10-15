@@ -1,1 +1,1 @@
-export { default as Test } from './components/Test';
+export { NilDataWalletProvider, useNilDataWallet } from './components/NilDataWalletProvider';
