@@ -2,18 +2,18 @@
 
 React provider for seamless NilData Wallet browser extension authentication.
 
-[![npm version](https://badge.fury.io/js/nil-data-wallet-connector.svg)](https://www.npmjs.com/package/nil-data-wallet-connector)
+[![npm version](https://badge.fury.io/js/nildata-wallet-connector.svg)](https://www.npmjs.com/package/nildata-wallet-connector)
 
 ## Installation
 
 ```bash
-npm install nil-data-wallet-connector
+npm install nildata-wallet-connector
 ```
 
 ## Quick Start
 
 ```typescript
-import { NilDataWalletProvider, useNilDataWallet } from 'nil-data-wallet-connector';
+import { NilDataWalletProvider, useNilDataWallet } from 'nildata-wallet-connector';
 
 // 1. Wrap your app
 function App() {
@@ -124,6 +124,6 @@ MIT © [ysongh](https://github.com/ysongh)
 
 ## Links
 
-- [GitHub](https://github.com/ysongh/nil-data-wallet-connector)
-- [Issues](https://github.com/ysongh/nil-data-wallet-connector/issues)
-- [NPM](https://www.npmjs.com/package/nil-data-wallet-connector)
+- [GitHub](https://github.com/ysongh/nildata-wallet-connector)
+- [Issues](https://github.com/ysongh/nildata-wallet-connector/issues)
+- [NPM](https://www.npmjs.com/package/nildata-wallet-connector)
