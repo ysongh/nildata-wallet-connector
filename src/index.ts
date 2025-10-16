@@ -1,1 +1,1 @@
-export { NilDataWalletProvider, useNilDataWallet } from './components/NilDataWalletProvider';
+export { NilDataWalletProvider, useNilDataWallet, sendDataToExtension } from './components/NilDataWalletProvider';
